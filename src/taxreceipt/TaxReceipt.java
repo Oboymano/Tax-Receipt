@@ -26,7 +26,14 @@ public class TaxReceipt extends Application {
         stage.setScene(scene);
         stage.show();
         
-        WriteExcel.writeXLSXFile(3, 0, "เกกีงาม 1");
+        Order order = new Order("snack", 2, 30);
+        
+        Receipt receipt = new Receipt();
+        receipt.setConsumerName("ภีมรจรัษ  ณควัชรภาณิชภูษิตนิกรโยธิน");
+        receipt.setConsumerAddress("ตึก ECC");
+        receipt.setCompanyTax("58010866");
+        receipt.addProduct(order);
+        WriteExcel.writeAll(receipt);
     }
 
     /**

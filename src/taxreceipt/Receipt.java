@@ -10,8 +10,13 @@ public class Receipt {
     private String company_tax;
     private String consumer_name;
     private String consumer_address;
+    private String consumer_tax;
     private int receipt_id;
     public List<Order> orders = new ArrayList<Order>();
+    
+    public Receipt() {
+        
+    }
     
     public Receipt(String company_name,String company_address,String company_tax) {
         this.company_name = company_name;
@@ -58,6 +63,14 @@ public class Receipt {
     
     public String getConsumerAddress() {
         return consumer_address;
+    }
+    
+    public void setConsumerTax(String consumer_tax) {
+        this.consumer_tax = consumer_tax;
+    }
+    
+    public String getConsumerTax() {
+        return consumer_tax;
     }
     
     public void increaseId() {
