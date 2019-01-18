@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="TaxReceipt.jnlp">
+  <information>
+    <title>TaxReceipt</title>
+    <vendor>Tubtim</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="TaxReceipt.jar" size="30186" download="eager" />
+    <jar href="lib\commons-collections4-4.2.jar" size="752798" download="eager" />
+    <jar href="lib\poi-4.0.1.jar" size="2718209" download="eager" />
+    <jar href="lib\poi-examples-4.0.1.jar" size="424225" download="eager" />
+    <jar href="lib\poi-excelant-4.0.1.jar" size="31336" download="eager" />
+    <jar href="lib\poi-ooxml-4.0.1.jar" size="1766188" download="eager" />
+    <jar href="lib\poi-ooxml-schemas-4.0.1.jar" size="7771088" download="eager" />
+    <jar href="lib\poi-scratchpad-4.0.1.jar" size="1383430" download="eager" />
+    <jar href="lib\xmlbeans-3.0.2.jar" size="2572733" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="TaxReceipt" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="taxreceipt.TaxReceipt"  name="TaxReceipt" />
+  <update check="always"/>
+</jnlp>
