@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class WriteExcel {
     public static void writeXLSXFile(int row, int col,String detail) throws IOException {
         try {
-            String path_file = "C:\\Users\\NEEN\\Documents\\GitHub\\Tax-Receipt\\src\\excel\\Tax_receipt_form.xlsx";
+            String path_file = "C:\\Users\\Tubtim\\Documents\\GitHub\\Tax-Receipt\\src\\excel\\Tax_receipt_form.xlsx";
             FileInputStream file = new FileInputStream(path_file);
 
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -77,11 +77,12 @@ public class WriteExcel {
         int row = 12;
         int col = 0;
         for(int i=0;i<orders.size();i++) {
+            
             writeXLSXFile(row, col, ""+(i+1));
             writeXLSXFile(row, col+1, orders.get(i).getName());
             writeXLSXFile(row, col+3, ""+orders.get(i).getAmount());
-            writeXLSXFile(row, col+4, ""+orders.get(i).getPrice());
-            writeXLSXFile(row, col+5, ""+(orders.get(i).getPrice()*orders.get(i).getAmount()));
+            writeXLSXFile(row, col+4, String.format("%.2f",orders.get(i).getPrice()));
+            writeXLSXFile(row, col+5, String.format("%.2f",orders.get(i).getPrice()*orders.get(i).getAmount()));
         }
     }
     

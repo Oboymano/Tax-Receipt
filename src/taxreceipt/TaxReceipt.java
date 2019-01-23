@@ -34,6 +34,9 @@ public class TaxReceipt extends Application {
         receipt.setCompanyTax("58010866");
         receipt.addProduct(order);
         WriteExcel.writeAll(receipt);
+        
+        Product product = new Product("กระเบื้อง",10);
+        WriteCSV.writeCsv(0,0,"test");
     }
 
     /**
