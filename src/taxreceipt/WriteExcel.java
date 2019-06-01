@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class WriteExcel {
     public static void writeXLSXFile(int row, int col,String detail) throws IOException {
         try {
-            String path_file = "C:\\Users\\Tubtim\\Documents\\GitHub\\Tax-Receipt\\src\\excel\\Tax_receipt_form.xlsx";
+            String path_file = System.getProperty("user.dir")+"/src/config/Tax_receipt_form.xlsx";
             FileInputStream file = new FileInputStream(path_file);
 
             XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -31,7 +31,32 @@ public class WriteExcel {
 
             file.close();
 
+            //String timeStamp = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss").format(new java.util.Date());
+           // String output_path = System.getProperty("user.dir")+"/output/"+timeStamp+".xlsx";
             FileOutputStream outFile =new FileOutputStream(new File(path_file));
+            workbook.write(outFile);
+            outFile.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void writeTempFile() throws IOException {
+        try {
+            String path_file = System.getProperty("user.dir")+"/src/config/Tax_receipt_form.xlsx";
+            FileInputStream file = new FileInputStream(path_file);
+
+            XSSFWorkbook workbook = new XSSFWorkbook(file);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            
+            file.close();
+
+            String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH.mm.ss").format(new java.util.Date());
+            String output_path = System.getProperty("user.dir")+"/output/"+timeStamp+".xlsx";
+            FileOutputStream outFile =new FileOutputStream(new File(output_path));
             workbook.write(outFile);
             outFile.close();
 
@@ -93,6 +118,9 @@ public class WriteExcel {
         writeReceiptId(receipt.getId());
         writeDate();
         writeOrders(receipt.orders);
+        receipt.increaseId();
+        writeTempFile();
+        Exit.start();
     }
     
 }

@@ -2,6 +2,7 @@ package taxreceipt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class Receipt {
     
@@ -11,7 +12,7 @@ public class Receipt {
     private String consumer_name;
     private String consumer_address;
     private String consumer_tax;
-    private int receipt_id;
+    public static int receipt_id;
     public List<Order> orders = new ArrayList<Order>();
     
     public Receipt() {
@@ -75,6 +76,10 @@ public class Receipt {
     
     public void increaseId() {
         this.receipt_id++;
+    }
+    
+    public void setId(int id) {
+        this.receipt_id = id;
     }
     
     public int getId() {

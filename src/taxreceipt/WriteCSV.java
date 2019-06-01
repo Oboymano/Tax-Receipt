@@ -14,7 +14,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class WriteCSV {
     public static void writeCsv(int row, int col,String detail) throws IOException {
         try {
-            String path_file = ".\\src\\excel\\Products.xlsx";
+            String path_file = System.getProperty("user.dir")+"/src/config/Products.xlsx";
             FileInputStream file = new FileInputStream(path_file);
 
             XSSFWorkbook workbook = new XSSFWorkbook(file);

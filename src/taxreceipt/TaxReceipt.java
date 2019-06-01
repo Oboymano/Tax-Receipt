@@ -26,9 +26,14 @@ public class TaxReceipt extends Application {
         stage.setScene(scene);
         stage.show();
         
+        InitialConfig.start();
+        Stock stock = new Stock();
+        stock.setProduct();
+        
         Order order = new Order("snack", 2, 30);
         
         Receipt receipt = new Receipt();
+        receipt.setId(InitialConfig.id);
         receipt.setConsumerName("ภีมรจรัษ  ณควัชรภาณิชภูษิตนิกรโยธิน");
         receipt.setConsumerAddress("ตึก ECC");
         receipt.setCompanyTax("58010866");
@@ -37,6 +42,7 @@ public class TaxReceipt extends Application {
         
         Product product = new Product("กระเบื้อง",10);
         WriteCSV.writeCsv(0,0,"test");
+        
     }
 
     /**
