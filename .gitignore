@@ -28,3 +28,4 @@ build/classes/taxreceipt/Receipt.class
 build/classes/taxreceipt/TaxReceipt.class
 build/classes/taxreceipt/WriteCSV.class
 build/classes/taxreceipt/WriteExcel.class
+build/classes/taxreceipt/Product.class
