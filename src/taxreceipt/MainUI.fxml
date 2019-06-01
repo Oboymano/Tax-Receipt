@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taxreceipt.MainUIController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="taxreceipt.MainUIController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -74,7 +74,7 @@
               </columns>
             </TableView>
             <Button id="print" fx:id="submit" layoutX="301.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleSubmitAction" text="พิมพ์" />
-            <Button id="add_order" layoutX="290.0" layoutY="256.0" mnemonicParsing="false" text="เพิ่มสินค้า" />
+            <Button id="add_order" layoutX="290.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleAddProductAction" text="เพิ่มสินค้า" />
       </children>
     </AnchorPane>
   </children>

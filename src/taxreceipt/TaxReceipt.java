@@ -17,31 +17,35 @@ import javafx.stage.Stage;
  */
 public class TaxReceipt extends Application {
     
+    public static Stage stage;
+    public static Stock stock;
+    public static Receipt receipt;
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
-        
+        this.stage = stage;
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
         
         InitialConfig.start();
-        Stock stock = new Stock();
+        this.stock = new Stock();
         stock.setProduct();
         
         Order order = new Order("snack", 2, 30);
         
-        Receipt receipt = new Receipt();
+        this.receipt = new Receipt();
         receipt.setId(InitialConfig.id);
+        /*
         receipt.setConsumerName("ภีมรจรัษ  ณควัชรภาณิชภูษิตนิกรโยธิน");
         receipt.setConsumerAddress("ตึก ECC");
         receipt.setCompanyTax("58010866");
         receipt.addProduct(order);
         WriteExcel.writeAll(receipt);
-        
-        Product product = new Product("กระเบื้อง",10);
-        WriteCSV.writeCsv(0,0,"test");
+        */
+        //WriteCSV.writeCsv(0,0,"test");
         
     }
 

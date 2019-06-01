@@ -10,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Stock {
-    private List<Product> products = new ArrayList<Product>();
+    public List<Product> products = new ArrayList<Product>();
     
     public Stock() {
         

@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,41 +21,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-public class MainUIController implements Initializable {
+public class AddProductUIController implements Initializable {
     
     @FXML
-    private Label label;
+    private TextField find_product;
     @FXML
-    private TextField consumer_tax;
+    private Button search;
     @FXML
-    private TextField consumer_name;
+    private TableView<Order> add_order_table;
     @FXML
-    private TextField consumer_address;
+    private TableColumn<Order,String> nameCol;
     @FXML
-    private TableView order_table;
-    @FXML
-    private SplitMenuButton add_order;
-    @FXML
-    private Button submit;
-    
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
-    @FXML
-    private void handleSubmitAction(ActionEvent event) throws IOException {
-        TaxReceipt.receipt.setId(InitialConfig.id);
-        TaxReceipt.receipt.setConsumerName(consumer_name.getText());
-        TaxReceipt.receipt.setConsumerAddress(consumer_address.getText());
-        TaxReceipt.receipt.setConsumerTax(consumer_tax.getText());
-        //receipt.addProduct(order);
-        WriteExcel.writeAll(TaxReceipt.receipt);
-    }
+    private TableColumn<Order,Integer> amountCol;
     
     @FXML
     private void handleAddProductAction(ActionEvent event) throws IOException {
@@ -67,11 +51,19 @@ public class MainUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList<Order> orders = FXCollections.observableArrayList();
+        nameCol.setCellValueFactory(new PropertyValueFactory<Order,String>("name"));
+        amountCol.setCellValueFactory(new PropertyValueFactory<Order,Integer>("amount"));
         
-        Order snack = new Order("kitkat",2,20.3);
-        Receipt receipt = new Receipt("Google","เกกีงาม 1","58010866");
-        receipt.addProduct(snack);
-        System.out.println(receipt.orders.get(0).toString());
+        add_order_table.setEditable(true);
+        for (int i=0;i<TaxReceipt.stock.size();i++){
+            //System.out.println(TaxReceipt.stock.products.get(i).getName());
+            //add_order_table.getItems().add(TaxReceipt.stock.products.get(i));
+         
+            orders.add(new Order(TaxReceipt.stock.products.get(i).getName(),
+                    1,TaxReceipt.stock.products.get(i).getPrice()));
+        }
+        add_order_table.setItems(orders);
 
     }    
     
