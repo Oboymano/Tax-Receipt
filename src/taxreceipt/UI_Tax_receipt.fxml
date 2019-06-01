@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -57,23 +58,29 @@
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <Label layoutX="14.0" layoutY="14.0" text="ชื่อผู้ซื้อ" />
-            <TextField layoutX="64.0" layoutY="10.0" prefHeight="25.0" prefWidth="541.0" />
+            <TextField id="consumer_name" layoutX="64.0" layoutY="10.0" prefHeight="25.0" prefWidth="541.0" />
             <Label layoutX="14.0" layoutY="46.0" text="ที่อยู่" />
-            <TextField layoutX="64.0" layoutY="42.0" prefHeight="25.0" prefWidth="541.0" />
+            <TextField id="consumer_address" layoutX="64.0" layoutY="42.0" prefHeight="25.0" prefWidth="541.0" />
             <Label layoutX="14.0" layoutY="80.0" text="เลขประจำตัวผู้เสียภาษีอากร" />
-            <TextField layoutX="155.0" layoutY="76.0" prefHeight="25.0" prefWidth="450.0" />
+            <TextField id="consumer_tax" layoutX="155.0" layoutY="76.0" prefHeight="25.0" prefWidth="450.0" />
             <Label layoutX="14.0" layoutY="111.0" text="รายการสั่งซื้อ" />
-            <Button layoutX="301.0" layoutY="336.0" mnemonicParsing="false" text="พิมพ์" />
             <Label layoutX="14.0" layoutY="293.0" text="การชำระค่าสินค้า" />
-            <RadioButton layoutX="122.0" layoutY="293.0" mnemonicParsing="false" text="เงินสด" />
-            <RadioButton layoutX="188.0" layoutY="293.0" mnemonicParsing="false" text="อื่นๆ" />
-            <TextField layoutX="239.0" layoutY="289.0" prefHeight="25.0" prefWidth="365.0" />
-            <TableView layoutX="34.0" layoutY="128.0" prefHeight="154.0" prefWidth="541.0">
+            <RadioButton id="cash" layoutX="122.0" layoutY="293.0" mnemonicParsing="false" text="เงินสด" />
+            <RadioButton id="other" layoutX="188.0" layoutY="293.0" mnemonicParsing="false" text="อื่นๆ" />
+            <TextField id="other_text" layoutX="239.0" layoutY="289.0" prefHeight="25.0" prefWidth="365.0" />
+            <TableView id="order_table" layoutX="34.0" layoutY="128.0" prefHeight="116.0" prefWidth="541.0">
               <columns>
-                <TableColumn prefWidth="456.0" text="รายการ" />
-                <TableColumn minWidth="0.0" prefWidth="84.0" text="จำนวน" />
+                <TableColumn id="order_name" prefWidth="456.0" text="รายการ" />
+                <TableColumn id="order_number" minWidth="0.0" prefWidth="84.0" text="จำนวน" />
               </columns>
             </TableView>
+            <SplitMenuButton id="add_order" layoutX="277.0" layoutY="253.0" mnemonicParsing="false" text="เพิ่มราการ">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </SplitMenuButton>
+            <Button id="print" layoutX="301.0" layoutY="336.0" mnemonicParsing="false" text="พิมพ์" />
       </children>
     </AnchorPane>
   </children>
