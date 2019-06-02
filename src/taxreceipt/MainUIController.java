@@ -74,12 +74,14 @@ public class MainUIController implements Initializable {
         TaxReceipt.receipt.setConsumerName(consumer_name.getText());
         TaxReceipt.receipt.setConsumerAddress(consumer_address.getText());
         TaxReceipt.receipt.setConsumerTax(consumer_tax.getText());
+        TaxReceipt.receipt.orders.clear();
         if(cash_radio.isSelected())
             TaxReceipt.receipt.payment = "เงินสด";
         else
             TaxReceipt.receipt.payment = option.getText();
         for(int i=0;i<orders.size();i++) {
-            TaxReceipt.receipt.addProduct(orders.get(i));
+            if(!TaxReceipt.receipt.orders.contains(orders.get(i)))
+                TaxReceipt.receipt.addProduct(orders.get(i));
         }
         WriteExcel.writeAll(TaxReceipt.receipt);
     }
@@ -95,11 +97,9 @@ public class MainUIController implements Initializable {
         stage.showAndWait();
 
         //controller.orders
-        
-        nameSummaryCol.setCellValueFactory(new PropertyValueFactory<Order,String>("name"));
-        amountSummaryCol.setCellValueFactory(new PropertyValueFactory<Order,Number>("amount"));
         //amountSummaryCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
-        summary_table.setItems(orders);
+        //summary_table.setItems(orders);
+        System.out.println(orders);
         summary_table.refresh();
         //text1.setText(controller.getText());
     }
@@ -109,6 +109,9 @@ public class MainUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        nameSummaryCol.setCellValueFactory(new PropertyValueFactory<Order,String>("name"));
+        amountSummaryCol.setCellValueFactory(new PropertyValueFactory<Order,Number>("amount"));
+        summary_table.setItems(orders);
         
         cash_radio.selectedProperty().addListener(new ChangeListener<Boolean>() {
         @Override

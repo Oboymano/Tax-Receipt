@@ -74,14 +74,14 @@ public class AddProductUIController implements Initializable {
     private void handleAddAction(ActionEvent event) throws IOException {
         Product selected_product = product_table.getSelectionModel().getSelectedItem();
         MainUIController.orders.add(new Order(selected_product.name,"1",selected_product.price));
-        order_table.setItems(MainUIController.orders);
+        order_table.refresh();
     }
     
     @FXML
     private void handleRemoveAction(ActionEvent event) throws IOException {
         Order selected_order = order_table.getSelectionModel().getSelectedItem();
         MainUIController.orders.remove(selected_order);
-        order_table.setItems(MainUIController.orders);
+        order_table.refresh();
     }
     
     @FXML
@@ -110,10 +110,8 @@ public class AddProductUIController implements Initializable {
                     TaxReceipt.stock.products.get(i).price));
         }
         filter = products;
-        if(products.size()!=0)
-            product_table.setItems(products);
-        if(MainUIController.orders.size()!=0)
-            order_table.setItems(MainUIController.orders);
+        product_table.setItems(filter);
+        order_table.setItems(MainUIController.orders);
         amountOrderCol.setOnEditCommit(
             new EventHandler<CellEditEvent<Order, Number>>() {
                 @Override
@@ -134,7 +132,6 @@ public class AddProductUIController implements Initializable {
             }else {
                 filter=products;
             }
-            product_table.setItems(filter);
             product_table.refresh();
         });
     }    
