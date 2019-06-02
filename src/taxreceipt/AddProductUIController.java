@@ -61,7 +61,7 @@ public class AddProductUIController implements Initializable {
     private Button submit;
     
     ObservableList<Product> products = FXCollections.observableArrayList();
-    
+    ObservableList<Product> filter = FXCollections.observableArrayList();
     @FXML
     private void handleSubmitAction(ActionEvent event) throws IOException {
         submit.getScene().getWindow().hide();
@@ -109,6 +109,7 @@ public class AddProductUIController implements Initializable {
             products.add(new Product(TaxReceipt.stock.products.get(i).getName(),
                     TaxReceipt.stock.products.get(i).price));
         }
+        filter = products;
         if(products.size()!=0)
             product_table.setItems(products);
         if(MainUIController.orders.size()!=0)
@@ -121,7 +122,21 @@ public class AddProductUIController implements Initializable {
                     MainUIController.orders.get(index).setAmount(Integer.toString(t.getNewValue().intValue()));
                 }
             }
-    );
+        );
+        find_product.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue!="") {
+                filter = FXCollections.observableArrayList();
+                for(int i=0;i<products.size();i++) {
+                    if(products.get(i).name.indexOf(newValue)!=-1) {
+                        filter.add(products.get(i));
+                    }
+                }
+            }else {
+                filter=products;
+            }
+            product_table.setItems(filter);
+            product_table.refresh();
+        });
     }    
     
 }
