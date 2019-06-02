@@ -154,11 +154,15 @@ public class WriteExcel {
     
     public static String generateString(double total) {
         String total_string;
+        boolean check = true;
         if(total%1==0) {
             total_string = Integer.toString((int)total);
             total_string+=".";
-        } else
-            total_string = Double.toString(total);
+            check = true;
+        } else {
+            total_string = Double.toString(total); 
+            check = false;
+        }
         System.out.println(total_string);
         ListEnum list = new ListEnum();
         String word ="";
@@ -183,6 +187,7 @@ public class WriteExcel {
                 case 0:
                     if(i!=total_string.length()-1)
                         extend = "จุด";
+                    break;
                 case 1:
                     extend = "";
                     break;
@@ -218,7 +223,13 @@ public class WriteExcel {
             old = charAt;
             
         }
+        if (check) {
+            word+="บาทถ้วน";
+        } else {
+            word+="บาท";
+        }
         System.out.println(word);
+        
         return word;
     }
     
