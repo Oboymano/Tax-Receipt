@@ -101,13 +101,27 @@ public class WriteExcel {
     public static void writeOrders(List<Order> orders) throws IOException {
         int row = 12;
         int col = 0;
+        double total = 0;
+        for(int i=0;i<17;i++) {
+            writeXLSXFile(row+i, col, "");
+            writeXLSXFile(row+i, col+1, "");
+            writeXLSXFile(row+i, col+3, "");
+            writeXLSXFile(row+i, col+4, "");
+            writeXLSXFile(row+i, col+5, "");
+        }
         for(int i=0;i<orders.size();i++) {
             writeXLSXFile(row+i, col, ""+(i+1));
             writeXLSXFile(row+i, col+1, orders.get(i).getName());
             writeXLSXFile(row+i, col+3, ""+orders.get(i).getAmount());
             writeXLSXFile(row+i, col+4, String.format("%.2f",orders.get(i).getPrice()));
             writeXLSXFile(row+i, col+5, String.format("%.2f",orders.get(i).getPrice()*orders.get(i).getAmount()));
+            total += orders.get(i).getPrice()*orders.get(i).getAmount();
         }
+        row =29;
+        col = 5;
+        writeXLSXFile(row, col, String.format("%.2f",0.93*total));
+        writeXLSXFile(row+1, col, String.format("%.2f",0.07*total));
+        writeXLSXFile(row+2, col, String.format("%.2f",total));
     }
     
     public static void writePayment(String payment) throws IOException {
