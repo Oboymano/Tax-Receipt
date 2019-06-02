@@ -32,7 +32,7 @@ public class Stock {
 
                 Cell cell_0=row.getCell(0);
                 Cell cell_1=row.getCell(1);
-                Product tmp = new Product(cell_0.getStringCellValue(),cell_1.getNumericCellValue());
+                Product tmp = new Product(cell_0.getStringCellValue(),Double.toString(cell_1.getNumericCellValue()));
                 addProduct(tmp);
             }
             printStock();

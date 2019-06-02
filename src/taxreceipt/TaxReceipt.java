@@ -20,21 +20,22 @@ public class TaxReceipt extends Application {
     public static Stage stage;
     public static Stock stock;
     public static Receipt receipt;
+    public static Scene main_scene;
     
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MainUI.fxml"));
         this.stage = stage;
-        Scene scene = new Scene(root);
+        main_scene = new Scene(root);
         
-        stage.setScene(scene);
+        
+        stage.setScene(main_scene);
         stage.show();
         
         InitialConfig.start();
         this.stock = new Stock();
         stock.setProduct();
         
-        Order order = new Order("snack", 2, 30);
         
         this.receipt = new Receipt();
         receipt.setId(InitialConfig.id);

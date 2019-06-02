@@ -33,10 +33,7 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Order snack = new Order("kitkat",2,20.3);
         Receipt receipt = new Receipt("Google","เกกีงาม 1","58010866");
-        receipt.addProduct(snack);
-        System.out.println(receipt.orders.get(0).toString());
 
     }    
     

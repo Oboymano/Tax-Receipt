@@ -7,10 +7,10 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Product {
-    private String name;
-    private double price;
+    public String name;
+    public String price;
     
-    public Product(String name,double price) {
+    public Product(String name,String price) {
         this.name = name;
         this.price = price;
     }
@@ -20,7 +20,7 @@ public class Product {
     }
     
     public double getPrice() {
-        return this.price;
+        return Double.parseDouble(this.price);
     }
     
 }

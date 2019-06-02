@@ -10,6 +10,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +22,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 public class MainUIController implements Initializable {
     
@@ -33,11 +43,24 @@ public class MainUIController implements Initializable {
     @FXML
     private TextField consumer_address;
     @FXML
-    private TableView order_table;
+    private TableView<Order> summary_table;
+    @FXML
+    private TableColumn<Order,String> nameSummaryCol;
+    @FXML
+    private TableColumn<Order,Number> amountSummaryCol;
     @FXML
     private SplitMenuButton add_order;
     @FXML
     private Button submit;
+    @FXML
+    public RadioButton cash_radio;
+    @FXML
+    private RadioButton option_radio;
+    @FXML
+    private TextField option;
+    Scene add_scene;
+    public static ObservableList<Order> orders = FXCollections.observableArrayList();
+    public static ObservableList<Order> print = FXCollections.observableArrayList();
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -51,27 +74,68 @@ public class MainUIController implements Initializable {
         TaxReceipt.receipt.setConsumerName(consumer_name.getText());
         TaxReceipt.receipt.setConsumerAddress(consumer_address.getText());
         TaxReceipt.receipt.setConsumerTax(consumer_tax.getText());
-        //receipt.addProduct(order);
+        if(cash_radio.isSelected())
+            TaxReceipt.receipt.payment = "เงินสด";
+        else
+            TaxReceipt.receipt.payment = option.getText();
+        for(int i=0;i<orders.size();i++) {
+            TaxReceipt.receipt.addProduct(orders.get(i));
+        }
         WriteExcel.writeAll(TaxReceipt.receipt);
     }
     
+    
     @FXML
     private void handleAddProductAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddProductUI.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddProductUI.fxml"));
+        //TaxReceipt.main_scene.setRoot(root);
+        Stage stage = new Stage();
+        stage.initOwner(submit.getScene().getWindow());
+        stage.setScene(new Scene((Parent) loader.load()));
+        stage.showAndWait();
+
+        //controller.orders
         
-        Scene scene = new Scene(root);
-        
-        TaxReceipt.stage.setScene(scene);
+        nameSummaryCol.setCellValueFactory(new PropertyValueFactory<Order,String>("name"));
+        amountSummaryCol.setCellValueFactory(new PropertyValueFactory<Order,Number>("amount"));
+        //amountSummaryCol.setCellFactory(TextFieldTableCell.forTableColumn(new NumberStringConverter()));
+        summary_table.setItems(orders);
+        summary_table.refresh();
+        //text1.setText(controller.getText());
     }
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        Order snack = new Order("kitkat",2,20.3);
-        Receipt receipt = new Receipt("Google","เกกีงาม 1","58010866");
-        receipt.addProduct(snack);
-        System.out.println(receipt.orders.get(0).toString());
+        cash_radio.selectedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+            if (isNowSelected) { 
+                cash_radio.setSelected(true);
+                option_radio.setSelected(false);
+                option.setVisible(false);
+            } else {
+                option.setVisible(true);
+            }
+        }
+        });
+        
+        option_radio.selectedProperty().addListener(new ChangeListener<Boolean>() {
+        @Override
+        public void changed(ObservableValue<? extends Boolean> obs, Boolean wasPreviouslySelected, Boolean isNowSelected) {
+            if (isNowSelected) {
+                option_radio.setSelected(true);
+                cash_radio.setSelected(false);
+                option.setVisible(true);
+            } else {
+                option.setVisible(true);
+                
+            }
+        }
+        });
 
     }    
     

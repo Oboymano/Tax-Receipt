@@ -13,6 +13,7 @@ public class Receipt {
     private String consumer_address;
     private String consumer_tax;
     public static int receipt_id;
+    public String payment;
     public List<Order> orders = new ArrayList<Order>();
     
     public Receipt() {

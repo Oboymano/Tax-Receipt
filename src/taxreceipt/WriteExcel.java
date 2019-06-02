@@ -86,7 +86,7 @@ public class WriteExcel {
     }
     
     public static void writeDate() throws IOException {
-        int row = 8;
+        int row = 9;
         int col = 5;
         String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         writeXLSXFile(row, col, timeStamp);
@@ -102,13 +102,18 @@ public class WriteExcel {
         int row = 12;
         int col = 0;
         for(int i=0;i<orders.size();i++) {
-            
-            writeXLSXFile(row, col, ""+(i+1));
-            writeXLSXFile(row, col+1, orders.get(i).getName());
-            writeXLSXFile(row, col+3, ""+orders.get(i).getAmount());
-            writeXLSXFile(row, col+4, String.format("%.2f",orders.get(i).getPrice()));
-            writeXLSXFile(row, col+5, String.format("%.2f",orders.get(i).getPrice()*orders.get(i).getAmount()));
+            writeXLSXFile(row+i, col, ""+(i+1));
+            writeXLSXFile(row+i, col+1, orders.get(i).getName());
+            writeXLSXFile(row+i, col+3, ""+orders.get(i).getAmount());
+            writeXLSXFile(row+i, col+4, String.format("%.2f",orders.get(i).getPrice()));
+            writeXLSXFile(row+i, col+5, String.format("%.2f",orders.get(i).getPrice()*orders.get(i).getAmount()));
         }
+    }
+    
+    public static void writePayment(String payment) throws IOException {
+        int row=32;
+        int col=2;
+        writeXLSXFile(row, col, payment);
     }
     
     public static void writeAll(Receipt receipt) throws IOException {
@@ -118,6 +123,7 @@ public class WriteExcel {
         writeReceiptId(receipt.getId());
         writeDate();
         writeOrders(receipt.orders);
+        writePayment(receipt.payment);
         receipt.increaseId();
         writeTempFile();
         Exit.start();

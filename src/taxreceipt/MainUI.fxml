@@ -61,16 +61,16 @@
             <Label layoutX="14.0" layoutY="46.0" text="ที่อยู่" />
             <TextField id="consumer_address" fx:id="consumer_address" layoutX="64.0" layoutY="42.0" prefHeight="25.0" prefWidth="541.0" />
             <Label layoutX="14.0" layoutY="80.0" text="เลขประจำตัวผู้เสียภาษีอากร" />
-            <TextField id="consumer_tax" fx:id="consumer_tax" layoutX="155.0" layoutY="76.0" prefHeight="25.0" prefWidth="450.0" />
+            <TextField id="consumer_tax" fx:id="consumer_tax" layoutX="175.0" layoutY="76.0" prefHeight="27.0" prefWidth="430.0" />
             <Label layoutX="14.0" layoutY="111.0" text="รายการสั่งซื้อ" />
             <Label layoutX="14.0" layoutY="293.0" text="การชำระค่าสินค้า" />
-            <RadioButton id="cash" layoutX="122.0" layoutY="293.0" mnemonicParsing="false" text="เงินสด" />
-            <RadioButton id="other" layoutX="188.0" layoutY="293.0" mnemonicParsing="false" text="อื่นๆ" />
-            <TextField id="other_text" layoutX="239.0" layoutY="289.0" prefHeight="25.0" prefWidth="365.0" />
-            <TableView id="order_table" fx:id="order_table" layoutX="50.0" layoutY="130.0" prefHeight="116.0" prefWidth="541.0">
+            <RadioButton id="cash" fx:id="cash_radio" layoutX="122.0" layoutY="293.0" mnemonicParsing="false" text="เงินสด" />
+            <RadioButton id="other" fx:id="option_radio" layoutX="188.0" layoutY="293.0" mnemonicParsing="false" text="อื่นๆ" />
+            <TextField id="other_text" fx:id="option" layoutX="239.0" layoutY="289.0" prefHeight="25.0" prefWidth="365.0" />
+            <TableView id="order_table" fx:id="summary_table" layoutX="50.0" layoutY="130.0" prefHeight="116.0" prefWidth="541.0">
               <columns>
-                <TableColumn id="order_name" prefWidth="456.0" text="รายการ" />
-                <TableColumn id="order_number" minWidth="0.0" prefWidth="84.0" text="จำนวน" />
+                <TableColumn id="order_name" fx:id="nameSummaryCol" prefWidth="456.0" text="รายการ" />
+                <TableColumn id="order_number" fx:id="amountSummaryCol" minWidth="0.0" prefWidth="84.0" text="จำนวน" />
               </columns>
             </TableView>
             <Button id="print" fx:id="submit" layoutX="301.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleSubmitAction" text="พิมพ์" />

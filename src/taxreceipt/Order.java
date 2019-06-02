@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private String name;
-    private int amount;
-    private double price;
+    public String name;
+    public String amount;
+    public String price;
     
-    public Order(String name,int amount,double price){
+    public Order(String name,String amount,String price){
         this.name = name;
         this.amount = amount;
         this.price = price;
@@ -18,16 +18,16 @@ public class Order {
         return name;
     }
     
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+    
     public int getAmount() {
-        return amount;
+        return Integer.parseInt(amount);
     }
     
     public double getPrice() {
-        return price;
+        return Double.parseDouble(price);
     }
     
-    @Override
-    public String toString() {
-        return name+"\t"+amount+"\t"+price;
-    }
 }
