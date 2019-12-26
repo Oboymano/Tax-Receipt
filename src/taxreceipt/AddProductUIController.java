@@ -123,11 +123,14 @@ public class AddProductUIController implements Initializable {
         );
         find_product.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue!="") {
+                System.out.println("SOMESHIT");
                 filter = FXCollections.observableArrayList();
                 for(int i=0;i<products.size();i++) {
                     if(products.get(i).name.indexOf(newValue)!=-1) {
+                        System.out.println(products.get(i));
                         filter.add(products.get(i));
                     }
+                product_table.setItems(filter);
                 }
             }else {
                 filter=products;
